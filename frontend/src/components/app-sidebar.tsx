@@ -17,6 +17,7 @@ const items = [
   {
     title: "Dispatch Board",
     icon: LayoutDashboard,
+    href: "/dispatch-board"
   },
   {
     title: "Reports",
@@ -37,7 +38,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton>
+                  <SidebarMenuButton render={<a href={`${item.href}`}></a>}>
                     <item.icon />
                     <span>{item.title}</span>
                   </SidebarMenuButton>
