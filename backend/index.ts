@@ -27,9 +27,19 @@ app.get("/test", (req, res) => {
 
 app.get("/get/jobs", async(req, res) => {
   let jobs = []
-  servicem8.auth(`${servicem8_api_key}`);
-  const result = await servicem8.listJobs({cursor: -1})
-  res.json(result.data)
+  let cursor = -1
+  const result = await fetch(`https://api.servicem8.com/api_1.0/job.json?cursor=${cursor}`, {
+    headers: { "X-API-KEY": `${servicem8_api_key}` }
+  })
+  console.log(result.headers)
+  res.json(await result.json())
+})
+
+app.get("/get/job-activities", async(req, res) => {
+  const result = await fetch("https://api.servicem8.com/api_1.0/jobactivity.json", {
+    headers: { "X-API-KEY": `${servicem8_api_key}` }
+  })
+  res.json(await result.json())
 })
 
 

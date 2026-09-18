@@ -128,25 +128,38 @@ function formatField(job: Job, field: Field) {
 
 export function DispatchBoard() {
     const [jobs, setJobs] = useState<Job[]>([]);
+    const [activities, setActivities] = useState<Job[]>([]);
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
     useEffect(() => {
-        const fetchJobsData = async () => {
-            const result = await axios.get("http://localhost:5000/get/jobs")
-            console.log(result.data)
-            setJobs(result.data)
+        const fetchData = async () => {
+            const [jobsResult, activitiesResult] = await Promise.all([
+                axios.get("http://localhost:5000/get/jobs"),
+                axios.get("http://localhost:5000/get/job-activities"),
+            ])
+            setJobs(jobsResult.data)
+            setActivities(activitiesResult.data)
         }
-        fetchJobsData()
+        fetchData()
     }, [])
 
-    const events = jobs.map((job) => ({
-        id: job.uuid as string,
-        title: (job.billing_address as string) || (job.job_address as string) || "Job",
-        start: job.date as string,
-        color: statusColor(job.status),
-        contrastColor: "#ffffff",
-        extendedProps: { job },
-    }));
+    const jobsByUuid = new Map(jobs.map((job) => [job.uuid as string, job]));
+
+    const events = activities
+        .filter((activity) => activity.active === 1 && activity.activity_was_scheduled === 1)
+        .flatMap((activity) => {
+            const job = jobsByUuid.get(activity.job_uuid as string);
+            if (!job) return [];
+            return [{
+                id: activity.uuid as string,
+                title: (job.billing_address as string) || (job.job_address as string) || "Job",
+                start: activity.start_date as string,
+                end: activity.end_date as string,
+                color: statusColor(job.status),
+                contrastColor: "#ffffff",
+                extendedProps: { job },
+            }];
+        });
 
     return (
         <SidebarProvider>
