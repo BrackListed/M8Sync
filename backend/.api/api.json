@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/api@7/schema.json",
+  "apis": [
+    {
+      "private": true,
+      "identifier": "servicem8",
+      "source": "@servicem8/v1.0#krh32umu6akcpp",
+      "integrity": "sha512-qpqitH2uYrHG96sio8Ht04qdzVzZ6MVMgOaPhYPqQgYRPizIMJze1n9Nf+NVQJ/hBpUBABijukCdvgytDakT2Q==",
+      "installerVersion": "7.0.2",
+      "language": "js",
+      "createdAt": "2026-09-18T11:22:04.336Z"
+    }
+  ]
+}

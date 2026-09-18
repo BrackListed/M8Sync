@@ -1,0 +1,34 @@
+/* Force the monarch theme's dark accent colors to a neutral black/gray chrome
+   instead of the purple palette default, so status colors on events are the
+   only color in the calendar. */
+[data-color-scheme="dark"] {
+  --fc-monarch-primary: #f5f5f5;
+  --fc-monarch-primary-foreground: #0a0a0a;
+  --fc-monarch-primary-over: #e5e5e5;
+  --fc-monarch-primary-down: #d4d4d4;
+
+  --fc-monarch-secondary: #262626;
+  --fc-monarch-secondary-foreground: #f5f5f5;
+  --fc-monarch-secondary-over: #333333;
+  --fc-monarch-secondary-down: #404040;
+
+  --fc-monarch-selected: #404040;
+  --fc-monarch-selected-foreground: #ffffff;
+  --fc-monarch-selected-over: #4d4d4d;
+  --fc-monarch-selected-down: #595959;
+  --fc-monarch-outline: #737373;
+
+  --fc-monarch-background: #000000;
+  --fc-monarch-popover: #0a0a0a;
+  --fc-monarch-popover-foreground: #f5f5f5;
+
+  --fc-monarch-foreground: #ffffff;
+  --fc-monarch-faint-foreground: #737373;
+  --fc-monarch-muted-foreground: #a3a3a3;
+
+  --fc-monarch-border: #262626;
+  --fc-monarch-strong-border: #404040;
+
+  --fc-monarch-now: #ef4444;
+  --fc-monarch-highlight: #ffffff1A;
+}

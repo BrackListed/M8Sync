@@ -1,4 +1,4 @@
-import { LayoutDashboard, Settings, BarChart3 } from "lucide-react"
+import { LayoutDashboard, Settings, BarChart3, Home } from "lucide-react"
 
 import {
   Sidebar,
@@ -15,6 +15,11 @@ import {
 
 const items = [
   {
+    title: "Home",
+    icon: Home,
+    href: "/"
+  },
+  {
     title: "Dispatch Board",
     icon: LayoutDashboard,
     href: "/dispatch-board"
@@ -22,6 +27,7 @@ const items = [
   {
     title: "Reports",
     icon: BarChart3,
+    href: "/reports"
   },
 ]
 
