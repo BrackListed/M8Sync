@@ -145,8 +145,18 @@ export function DispatchBoard() {
 
     const jobsByUuid = new Map(jobs.map((job) => [job.uuid as string, job]));
 
-    const events = activities
-        .filter((activity) => activity.active === 1 && activity.activity_was_scheduled === 1)
+    // ServiceM8 stores one activity per assigned staff member, so a job booked for
+    // two people arrives twice. Collapse identical bookings into one entry.
+    const bookings = new Map(
+        activities
+            .filter((activity) => activity.active === 1 && activity.activity_was_scheduled === 1)
+            .map((activity) => [
+                `${activity.job_uuid}|${activity.start_date}|${activity.end_date}`,
+                activity,
+            ])
+    );
+
+    const events = [...bookings.values()]
         .flatMap((activity) => {
             const job = jobsByUuid.get(activity.job_uuid as string);
             if (!job) return [];
